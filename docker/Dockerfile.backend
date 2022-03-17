@@ -1,15 +1,11 @@
 FROM python:3.9.10-buster
 
-ENV PIP_DISABLE_PIP_VERSION_CHECK=on
-
-RUN pip install poetry
-
 WORKDIR /app
-COPY backend/poetry.lock backend/pyproject.toml /app/
-
-RUN poetry config virtualenvs.create false
-RUN poetry install --no-interaction
-
 COPY backend/ /app
 
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+ENV PATH="$PATH:/root/.local/bin"
+
+RUN curl -sSL https://install.python-poetry.org | python3 - && \
+    poetry install
+
+CMD [ "poetry", "run" , "flask", "run", "--host=0.0.0.0" ]
