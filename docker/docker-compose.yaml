@@ -6,3 +6,12 @@ services:
       dockerfile: ./docker/Dockerfile.backend
     ports:
       - "8000:5000"
+  mongodb:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - ~/apps/mongo:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=username
+      - MONGO_INITDB_ROOT_PASSWORD=password
