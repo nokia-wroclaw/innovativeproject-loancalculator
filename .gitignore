@@ -1,1 +1,3 @@
-backend/__pycache__/
+*.pyc
+backend\backend\__pycache__
+backend\tests\__pycache__
