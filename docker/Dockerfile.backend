@@ -1,0 +1,12 @@
+FROM python:3.9.10-buster
+
+WORKDIR /app/backend/
+COPY backend/ /app
+
+ENV PATH="$PATH:/root/.local/bin"
+
+RUN curl -sSL https://install.python-poetry.org | python3 - && \
+    poetry config virtualenvs.create false && \
+    poetry install
+
+CMD [ "poetry", "run" , "flask", "run", "--host=0.0.0.0" ]
