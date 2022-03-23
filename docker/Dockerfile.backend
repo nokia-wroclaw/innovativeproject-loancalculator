@@ -6,6 +6,7 @@ COPY backend/ /app
 ENV PATH="$PATH:/root/.local/bin"
 
 RUN curl -sSL https://install.python-poetry.org | python3 - && \
-    poetry install
+    poetry install && \
+    poetry config virtualenvs.create false
 
 CMD [ "poetry", "run" , "flask", "run", "--host=0.0.0.0" ]
