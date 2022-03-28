@@ -1,20 +1,22 @@
 import React from 'react'
-import {Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink} from './NavbarElements'
+import {Nav, NavLink, HamburgerIcon,Icon, NavMenu, NavBtn, NavBtnLink} from './NavbarElements'
 import loanlyLogo from '../../images/loanlyWhiteLogo.svg';
-const Navbar= () => {
+const Navbar = ({toggle}) => {
   return (
     <>
         <Nav>
             <NavLink to='/'>
-                <img src={loanlyLogo} alt="Yoł yoł yoł"/>
+                <img src={loanlyLogo} width="120px" height="auto"/>
             </NavLink>
-            <Bars />
+            <Icon onClick={toggle}>
+                <HamburgerIcon />
+            </Icon>
             <NavMenu>
-            <NavBtn>
-                <NavBtnLink to="/kalkulator">Kalkulator</NavBtnLink>
-            </NavBtn>
-                <NavLink to="/jak-obliczamy-rate" activeStyle>Jak Obliczamy Rate?</NavLink>
-                <NavLink to="/przydatne-pojecia" activeStyle>Przydatne Pojecia</NavLink>
+                <NavBtn>
+                    <NavBtnLink to="/kalkulator">Kalkulator</NavBtnLink>
+                </NavBtn>
+                <NavLink to="/jak-obliczamy-rate" activeStyle>Jak obliczamy ratę?</NavLink>
+                <NavLink to="/przydatne-pojecia" activeStyle>Przydatne pojecia</NavLink>
             </NavMenu>
 
         </Nav>
