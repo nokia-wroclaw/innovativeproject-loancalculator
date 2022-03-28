@@ -1,6 +1,6 @@
 import React from 'react'
 
-const UsefulTerms = () => {
+const Results = () => {
   return (
     <div style={{display: 'flex', justifyContent:'center', alignItems: 'center', height: '90vh'}}>
         <h1>
@@ -10,4 +10,4 @@ const UsefulTerms = () => {
   );
 };
 
-export default UsefulTerms
+export default Results

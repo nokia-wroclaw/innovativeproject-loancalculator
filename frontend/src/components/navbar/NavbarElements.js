@@ -9,6 +9,7 @@ export const Nav = styled.nav`
     justify-content: space-between;
     padding: 0.5rem calc((100vw - 1000px) /2);
     z-index: 10000;
+
 `;
 
 export const NavLink = styled(Link)`
@@ -16,28 +17,34 @@ export const NavLink = styled(Link)`
     display: flex;
     align-items: center;
     text-decoration: none;
-    padding: 0 1rem;
+    padding:  1.5rem;
     height: 100%;
     cursor: pointer;
+
     &.active {
-    color: #15cdfc;
+    font-weight: 600;
     }
     
 `;
 
-export const Bars = styled(FaBars)`
-    display: none;
-    color: #fff;
-    @media screen and (max-width: 768px) {
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate(-100%, 75%);
-    font-size: 1.8rem;
-    cursor: pointer;
-`;
+export const HamburgerIcon = styled(FaBars)`
+    color: #ffffff;
+`
 
+export const Icon = styled.div`
+    display: none;
+
+    @media screen and (max-width: 768px) {
+        display: block;
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        background: transparent;
+        font-size: 2rem;
+        cursor: pointer;
+        outline: none;
+    }
+`
 export const NavMenu =  styled.div`
     display: flex;
     align-items: center;
