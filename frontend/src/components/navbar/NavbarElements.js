@@ -20,9 +20,6 @@ export const NavLink = styled(Link)`
     height: 100%;
     cursor: pointer;
     display: flex;
-    &.active {
-    font-weight: 600;
-    }
     
 `;
 

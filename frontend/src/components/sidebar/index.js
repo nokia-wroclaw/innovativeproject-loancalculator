@@ -10,8 +10,8 @@ const Sidebar = ({isOpen, toggle}) => {
             <CloseIcon />
         </Icon>
     <SidebarWrapper>
-        <img src={sidebarIllustration}  width="200px" height="auto"/>
-        <img src={loanlyLogo} width="150px" height="auto"/> 
+        <img src={sidebarIllustration}  width="200px" height="auto" alt="sidebar illustration" />
+        <img src={loanlyLogo} width="150px" height="auto" alt="logo"/> 
         <SidebarMenu>
             <SidebarLink to="/" onClick={toggle} >Strona główna </SidebarLink>
             <SidebarLink to="/kalkulator" onClick={toggle} >Kalkulator</SidebarLink>
