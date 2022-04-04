@@ -2,9 +2,11 @@ name: innovativeproject-loancalculator
 
 on:
   push:
-    branches: '**'
+    branches:
+      - main
   pull_request:
     branches: '**'
+  workflow_dispatch:
 
 jobs:
   lint-backend:
@@ -47,7 +49,7 @@ jobs:
     - name: Format and lint frontend with eslint and prettier
       run: |
         cd frontend
-        npm install
+        npm ci
         npx prettier --write ./src
         npx eslint --fix ./src
   
@@ -65,7 +67,7 @@ jobs:
     - name: Test frontend with npm test
       run: |
         cd frontend
-        npm install
+        npm ci
         npm test
         
   build-docker-image:
