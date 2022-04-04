@@ -1,13 +1,13 @@
 import React from 'react'
 
-const Results = () => {
+const HowToCalculateInstallments = () => {
   return (
     <div style={{display: 'flex', justifyContent:'center', alignItems: 'center', height: '90vh'}}>
         <h1>
-            Placeholder for Results page
+          Placeholder for how we calculate installments
         </h1>
     </div>
   );
 };
 
-export default Results
+export default HowToCalculateInstallments

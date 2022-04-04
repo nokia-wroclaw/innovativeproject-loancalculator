@@ -6,7 +6,7 @@ export const Nav = styled.nav`
     background: linear-gradient(88.54deg, #271F7F -0.21%, #5E60CE 60.5%, #00FFD4 112.08%);
     height: 80px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 0.5rem calc((100vw - 1000px) /2);
     z-index: 10000;
 
@@ -14,13 +14,12 @@ export const Nav = styled.nav`
 
 export const NavLink = styled(Link)`
     color: #fff;
-    display: flex;
     align-items: center;
     text-decoration: none;
     padding:  1.5rem;
     height: 100%;
     cursor: pointer;
-
+    display: flex;
     &.active {
     font-weight: 600;
     }
