@@ -1,10 +1,11 @@
 import './App.css';
 import Navbar from './components/navbar';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import Home from './pages';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import Home from './pages/index';
 import Calculator from './pages/calculator';
 import HowToCalculateInstallments from './pages/howToCalculateInstallments';
-import UsefulTerms from './pages/usefulTerms';
+import UsefulTerms from './pages/usefulTerms/usefulTerms';
+import CalculatedResults from './pages/calculatedResults';
 import Sidebar from './components/sidebar';
 import React, {useState} from 'react';
 function App() {
@@ -14,16 +15,17 @@ function App() {
   }
 
   return (
-    <Router>
+    <BrowserRouter>
       <Sidebar isOpen={isOpen} toggle={toggle}/>
       <Navbar toggle={toggle}/>
-      <Routes>
-        <Route path="/" exact element={<Home />}></Route>
+    <Routes>
+    <Route path="/" exact element={<Home />}></Route>
         <Route path="/kalkulator"  element={<Calculator/>} />
         <Route path="/jak-obliczamy-rate"  element={<HowToCalculateInstallments/>} />
         <Route path="/przydatne-pojecia"  element={<UsefulTerms/>} />
-      </Routes>
-    </Router>
+        <Route path="/wyniki-obliczen"  element={<CalculatedResults/>} />
+    </Routes>
+  </BrowserRouter>
   );
 }
 
