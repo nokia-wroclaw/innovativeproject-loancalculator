@@ -32,11 +32,11 @@ function Navbar({ toggle }) {
 }
 
 Navbar.propTypes = {
-  toggle: PropTypes.objectOf(PropTypes.object),
+  toggle: PropTypes.func,
 };
 
 Navbar.defaultProps = {
-  toggle: true,
+  toggle: 0,
 };
 
 export default Navbar;

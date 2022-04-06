@@ -46,12 +46,12 @@ function Sidebar({ isOpen, toggle }) {
 
 Sidebar.propTypes = {
   isOpen: PropTypes.bool,
-  toggle: PropTypes.objectOf(PropTypes.object),
+  toggle: PropTypes.func,
 };
 
 Sidebar.defaultProps = {
   isOpen: false,
-  toggle: true,
+  toggle: 0,
 };
 
 export default Sidebar;
