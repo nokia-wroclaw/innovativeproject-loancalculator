@@ -1,13 +1,12 @@
-import React from 'react'
+import React from 'react';
+import './style.css';
 
-const UsefulTerms = () => {
+function UsefulTerms() {
   return (
-    <div style={{display: 'flex', justifyContent:'center', alignItems: 'center', height: '90vh'}}>
-        <h1>
-            Placeholder for useful terms
-        </h1>
+    <div className="usefulTermsContainer">
+      <h1>Placeholder for useful terms</h1>
     </div>
   );
-};
+}
 
-export default UsefulTerms
+export default UsefulTerms;
