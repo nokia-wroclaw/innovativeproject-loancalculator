@@ -1,11 +1,12 @@
 import React from 'react';
-import './style.css';
+import { PlaceholderStyle } from '../../components/placeholderStyle/PlaceholderStyleElement';
+import './HowToCalculateInstallmentsElements';
 
 function HowToCalculateInstallments() {
   return (
-    <div className="howToContainer">
+    <PlaceholderStyle>
       <h1>Placeholder for how we calculate installments</h1>
-    </div>
+    </PlaceholderStyle>
   );
 }
 

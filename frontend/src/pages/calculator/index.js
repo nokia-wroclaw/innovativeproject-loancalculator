@@ -1,11 +1,12 @@
 import React from 'react';
-import './style.css';
+import { PlaceholderStyle } from '../../components/placeholderStyle/PlaceholderStyleElement';
+import './CalculatorElements';
 
 function Calculator() {
   return (
-    <div className="calculatorContainer">
+    <PlaceholderStyle>
       <h1>Placeholder for calculator</h1>
-    </div>
+    </PlaceholderStyle>
   );
 }
 

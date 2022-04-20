@@ -2,10 +2,10 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import React, { useState } from 'react';
 import Navbar from './components/navbar';
-import Home from './pages/index';
+import Home from './pages/homepage';
 import Calculator from './pages/calculator';
 import HowToCalculateInstallments from './pages/howToCalculateInstallments';
-import UsefulTerms from './pages/usefulTerms/usefulTerms';
+import UsefulTerms from './pages/usefulTerms';
 import CalculatedResults from './pages/calculatedResults';
 import Sidebar from './components/sidebar';
 

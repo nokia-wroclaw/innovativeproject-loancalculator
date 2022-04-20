@@ -1,13 +1,13 @@
 import React from 'react';
 import { PlaceholderStyle } from '../../components/placeholderStyle/PlaceholderStyleElement';
-import './CalculatedResultsElements';
+import './IndexElements';
 
-function CalculatedResults() {
+function Home() {
   return (
     <PlaceholderStyle>
-      <h1>Placeholder for calculated results</h1>
+      <h1>Placeholder for homepage</h1>
     </PlaceholderStyle>
   );
 }
 
-export default CalculatedResults;
+export default Home;
