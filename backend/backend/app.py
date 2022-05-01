@@ -2,11 +2,13 @@ from flask import Flask
 from flask_restful import Api, Resource, reqparse
 from flask_cors import CORS
 import backend.calculator as calculator
+from flask_pymongo import PyMongo
 
 app = Flask(__name__)
 api = Api(app)
-
 cors = CORS(app, resources={r"/mortgageCalculator/*": {"origins": "*"}})
+mongodb_client = PyMongo(app, uri="mongodb://localhost:27017/calculator_data")
+db = mongodb_client.db
 
 mortgageCalculator_put_args = reqparse.RequestParser()
 # 1
@@ -64,6 +66,7 @@ class MortgageCalculator(Resource):
     def put(self):
         kwargs = mortgageCalculator_put_args.parse_args()
         mortgage = self.calculate_mortgage(kwargs)
+        db.calculator_logs.insert_one(kwargs)
         return mortgage, 201
 
 
