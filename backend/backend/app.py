@@ -1,14 +1,21 @@
 from flask import Flask
-from flask_restful import Api, Resource, reqparse, abort
+from flask_restful import Api, Resource, reqparse
+from flask_cors import CORS
 import backend.calculator as calculator
 
 app = Flask(__name__)
 api = Api(app)
 
+cors = CORS(app, resources={r"/mortgageCalculator/*": {"origins": "*"}})
+
 mortgageCalculator_put_args = reqparse.RequestParser()
 # 1
 mortgageCalculator_put_args.add_argument(
-    "interest_type", type=str, help="Interest type is required", required=True
+    "interest_type",
+    type=str,
+    choices=("fixed", "WIBOR"),
+    help="Interest type is required",
+    required=True,
 )
 # 2
 mortgageCalculator_put_args.add_argument(
@@ -17,10 +24,6 @@ mortgageCalculator_put_args.add_argument(
     choices=("fixed", "descending"),
     help='Installment type must be "fixed" or "descending"',
     required=True,
-)
-# 3
-mortgageCalculator_put_args.add_argument(
-    "mortgage_value", type=int, help="Mortgage value is required", required=True
 )
 # 4
 mortgageCalculator_put_args.add_argument(
