@@ -39,7 +39,7 @@ function SliderInputSection({
           min={minSlider}
           marks={marks}
           step={stepSize}
-          style={{ width: '500px' }}
+          style={{ width: '90%' }}
           onChange={onChange}
           value={typeof inputValue === 'number' ? inputValue : 0}
         />
@@ -53,6 +53,7 @@ function SliderInputSection({
           max={maxSlider}
           onChange={onChange}
           value={inputValue}
+          style={{ width: '95%' }}
         />
       </InputContainer>
     </SliderContainer>
