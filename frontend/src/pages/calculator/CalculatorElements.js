@@ -6,7 +6,7 @@ import 'antd/dist/antd.css';
 export const FormContainer = styled(Form)`
   height: auto;
   min-height: 90vh;
-  padding-top: 10vh;
+  padding-top: 10vh !important;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(4, 1fr) 0.5fr;
@@ -15,6 +15,16 @@ export const FormContainer = styled(Form)`
   background-color: #f9f6fb;
   align-content: center;
   justify-items: center;
+
+  @media screen and (max-width: 1400px) {
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(5, 1fr) 0.5fr;
+  }
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, 1fr) 1.5fr repeat(4, 1fr) 0.5fr;
+  }
 `;
 export const CustomSlider = styled(Slider)`
   width: 95%;
@@ -85,37 +95,109 @@ export const DataPlaceholder = styled.div`
   padding: 1.5rem;
   width: 25vw;
   height: 200px;
+
+  @media screen and (max-width: 1400px) {
+    width: 40vw;
+  }
+
+  @media screen and (max-width: 780px) {
+    width: 80vw;
+  }
 `;
 
 export const BoxOne = styled(DataPlaceholder)`
   grid-area: 1/2/2/5;
+
+  @media screen and (max-width: 1400px) {
+    grid-area: 1/2/2/5;
+  }
+
+  @media screen and (max-width: 780px) {
+    grid-area: 1/2/2/5;
+  }
 `;
 export const BoxTwo = styled(DataPlaceholder)`
   grid-area: 2/2/3/5;
+
+  @media screen and (max-width: 1400px) {
+    grid-area: 2/2/3/5;
+  }
+  @media screen and (max-width: 780px) {
+    grid-area: 2/2/3/5;
+  }
 `;
 export const BoxThree = styled(DataPlaceholder)`
   grid-area: 3/2/4/5;
+
+  @media screen and (max-width: 1400px) {
+    grid-area: 3/2/4/5;
+  }
+  @media screen and (max-width: 780px) {
+    grid-area: 3/2/4/5;
+  }
 `;
 export const BoxFour = styled(DataPlaceholder)`
   grid-area: 3/5/4/9;
+
+  @media screen and (max-width: 1400px) {
+    grid-area: 3/6/4/9;
+  }
+  @media screen and (max-width: 780px) {
+    grid-area: 4/2/5/5;
+  }
 `;
 export const BoxFive = styled(DataPlaceholder)`
   grid-area: 3/9/4/12;
+
+  @media screen and (max-width: 1400px) {
+    grid-area: 4/2/5/5;
+  }
+  @media screen and (max-width: 780px) {
+    grid-area: 6/2/7/5;
+  }
 `;
 export const BoxSix = styled(DataPlaceholder)`
   grid-area: 4/2/5/5;
+
+  @media screen and (max-width: 1400px) {
+    grid-area: 4/6/5/9;
+  }
+  @media screen and (max-width: 780px) {
+    grid-area: 7/2/8/5;
+  
 `;
 export const BoxSeven = styled(DataPlaceholder)`
   grid-area: 4/5/5/9;
+
+  @media screen and (max-width: 1400px) {
+    grid-area: 5/2/6/5;
+  }
+  @media screen and (max-width: 780px) {
+    grid-area: 8/2/9/5;
+  }
 `;
 export const ButtonContainer = styled.div`
   grid-area: 4/9/5/12;
+
+  @media screen and (max-width: 1400px) {
+    grid-area: 5/6/6/9;
+  }
+  @media screen and (max-width: 780px) {
+    grid-area: 9/2/10/5;
+  }
 `;
 export const CalculatorSubmitButton = styled(SubmitButton)`
   width: 25vw;
   height: 200px;
   border-radius: 25px;
   font-size: 1.125rem;
+
+  @media screen and (max-width: 1400px) {
+    width: 40vw;
+  }
+  @media screen and (max-width: 780px) {
+    width: 80vw;
+  }
 `;
 
 export const IllustrationContainer = styled.div`
@@ -127,76 +209,17 @@ export const IllustrationContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: 1400px) {
+    grid-area: 1/6/3/9;
+
+    .img {
+      width: 100% !important;
+      height: auto;
+    }
+  }
+
+  @media screen and (max-width: 780px) {
+    grid-area: 5/2/6/5;
+  }
 `;
-// import styled from 'styled-components';
-// import { SemiHeader } from '../../components/semiHeader/SemiHeader';
-// import { GradientButton } from '../../components/gradientButton/GradientButton';
-
-// export const CalculatorHeader = styled(SemiHeader)`
-//   grid-area: 1/2/2/5;
-//   align-self: flex-end;
-//   width: 100%;
-// `;
-
-// export const CalculatorPage = styled.div`
-//   display: grid;
-//   grid-template-columns: repeat(12, 1fr);
-//   grid-template-rows: 3fr 5fr 5fr 6fr 6fr 3fr;
-//   row-gap: 3vmax;
-// `;
-
-// export const BoxOne = styled.div`
-//   grid-area: 2/2/3/5;
-//   align-self: center;
-// `;
-// export const BoxTwo = styled.div`
-//   grid-area: 3/2/4/5;
-//   align-self: center;
-// `;
-// export const BoxThree = styled.div`
-//   grid-area: 4/2/5/5;
-//   align-self: center;
-// `;
-// export const BoxFour = styled.div`
-//   grid-area: 4/5/5/9;
-//   justify-self: center;
-//   align-self: center;
-// `;
-// export const BoxFive = styled.div`
-//   grid-area: 4/9/5/12;
-//   align-self: center;
-// `;
-// export const BoxSix = styled.div`
-//   grid-area: 5/2/6/5;
-//   align-self: center;
-// `;
-// export const BoxSeven = styled.div`
-//   grid-area: 5/5/6/9;
-//   justify-self: center;
-//   align-self: center;
-// `;
-// export const CalculatorImage = styled.img`
-//   grid-area: 2/6/4/12;
-//   width: 70vh;
-//   align-self: center;
-//   justify-self: center;
-// `;
-
-// export const ResultsFooter = styled.div`
-//   display: flex;
-//   background: linear-gradient(
-//     88.54deg,
-//     #6930c3 -0.21%,
-//     #271f7f 60.5%,
-//     #271f7f 112.08%
-//   );
-//   justify-content: center;
-//   padding: 3rem;
-// `;
-
-// export const CTAButton = styled(GradientButton)`
-//   grid-area: 6/1/7/13;
-//   justify-self: center;
-//   padding-bottom: 5rem;
-//   align-self: center;
-// `;

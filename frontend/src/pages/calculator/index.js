@@ -68,8 +68,6 @@ function Calculator() {
       <FormContainer
         {...formItemLayout}
         onFinish={(values) => {
-          // putData(values);
-          console.log(JSON.stringify(values));
           axios
             .put(
               'http://127.0.0.1:5000/mortgageCalculator',
@@ -80,11 +78,14 @@ function Calculator() {
                 },
               }
             )
-            .then((response) => console.log(response))
+            .then((response) =>
+              navigate('/wyniki-obliczen', {
+                state: { response: response.data },
+              })
+            )
             .catch((error) => {
               console.log(error);
             });
-          navigate('/wyniki-obliczen');
         }}
       >
         <IllustrationContainer>
