@@ -46,23 +46,58 @@ mortgageCalculator_put_args.add_argument(
 
 
 class MortgageCalculator(Resource):
-    def validate_values(self, credit_amount, loan_term, interest_rate):
-        if credit_amount <= 0:
-            abort(400, message={"credit_amount": "Invalid credit amount value"})
-        if loan_term <= 0:
-            abort(400, message={"loan_term": "Invalid loan term value"})
-        if interest_rate <= 0:
-            abort(400, message={"interest_rate": "Invalid interest rate value"})
+    # def validate_values(self, credit_amount, loan_term, interest_rate):
+    #     if credit_amount <= 0:
+    #         abort(400, message={"credit_amount": "Invalid credit amount value"})
+    #     if loan_term <= 0:
+    #         abort(400, message={"loan_term": "Invalid loan term value"})
+    #     if interest_rate <= 0:
+    #         abort(400, message={"interest_rate": "Invalid interest rate value"})
 
-    def calculate_mortgage(self, kwargs):
-        interest_type = kwargs["interest_type"]
-        installment_type = kwargs["installment_type"]
-        credit_amount = kwargs["credit_amount"]
-        loan_term = kwargs["loan_term"]
-        interest_rate = kwargs["interest_rate"]
+    # def calculate_mortgage(self, kwargs):
+    #     interest_type = kwargs["interest_type"]
+    #     installment_type = kwargs["installment_type"]
+    #     credit_amount = kwargs["credit_amount"]
+    #     loan_term = kwargs["loan_term"]
+    #     interest_rate = kwargs["interest_rate"]
 
-        self.validate_values(credit_amount, loan_term, interest_rate)
+    #     self.validate_values(credit_amount, loan_term, interest_rate)
 
+    #     if interest_type == "fixed":
+    #         if installment_type == "fixed":
+    #             base_monthly_payment = calculate_fixed_rate(
+    #                 credit_amount, loan_term, interest_rate
+    #             )
+    #             return {"monthly_payment": base_monthly_payment}
+
+    #         base_monthly_payment = calculate_descending_rate(
+    #             credit_amount, loan_term, interest_rate
+    #         )
+    #         return {"monthly_payment": base_monthly_payment}
+
+    #     abort(500, message="not implemented")
+
+    # def put(self):
+    #     kwargs = mortgageCalculator_put_args.parse_args()
+    #     mortgage = self.calculate_mortgage(kwargs)
+    #     db.insert_user_logs(kwargs)
+    #     return mortgage, 201
+    # def validate_values(self, credit_amount, loan_term, interest_rate):
+    #     if credit_amount <= 0:
+    #         abort(400, message={"credit_amount": "Invalid credit amount value"})
+    #     if loan_term <= 0:
+    #         abort(400, message={"loan_term": "Invalid loan term value"})
+    #     if interest_rate <= 0:
+    #         abort(400, message={"interest_rate": "Invalid interest rate value"})
+
+    def validate_values(self, *args):
+        for arg_value in args:
+            if arg_value <= 0:
+                abort(400, message={"arg_value": "Values below 1 are not valid"})
+
+    def calculate_mortgage(
+        self, interest_type, installment_type, credit_amount, loan_term, interest_rate
+    ):
         if interest_type == "fixed":
             if installment_type == "fixed":
                 base_monthly_payment = calculate_fixed_rate(
@@ -78,9 +113,20 @@ class MortgageCalculator(Resource):
         abort(500, message="not implemented")
 
     def put(self):
-        kwargs = mortgageCalculator_put_args.parse_args()
-        mortgage = self.calculate_mortgage(kwargs)
-        db.insert_user_logs(kwargs)
+
+        user_params = mortgageCalculator_put_args.parse_args()
+
+        interest_type = user_params["interest_type"]
+        installment_type = user_params["installment_type"]
+        credit_amount = user_params["credit_amount"]
+        loan_term = user_params["loan_term"]
+        interest_rate = user_params["interest_rate"]
+
+        self.validate_values(credit_amount, loan_term, interest_rate)
+        mortgage = self.calculate_mortgage(
+            interest_type, installment_type, credit_amount, loan_term, interest_rate
+        )
+        db.insert_user_logs(user_params)
         return mortgage, 201
 
 
