@@ -46,50 +46,6 @@ mortgageCalculator_put_args.add_argument(
 
 
 class MortgageCalculator(Resource):
-    # def validate_values(self, credit_amount, loan_term, interest_rate):
-    #     if credit_amount <= 0:
-    #         abort(400, message={"credit_amount": "Invalid credit amount value"})
-    #     if loan_term <= 0:
-    #         abort(400, message={"loan_term": "Invalid loan term value"})
-    #     if interest_rate <= 0:
-    #         abort(400, message={"interest_rate": "Invalid interest rate value"})
-
-    # def calculate_mortgage(self, kwargs):
-    #     interest_type = kwargs["interest_type"]
-    #     installment_type = kwargs["installment_type"]
-    #     credit_amount = kwargs["credit_amount"]
-    #     loan_term = kwargs["loan_term"]
-    #     interest_rate = kwargs["interest_rate"]
-
-    #     self.validate_values(credit_amount, loan_term, interest_rate)
-
-    #     if interest_type == "fixed":
-    #         if installment_type == "fixed":
-    #             base_monthly_payment = calculate_fixed_rate(
-    #                 credit_amount, loan_term, interest_rate
-    #             )
-    #             return {"monthly_payment": base_monthly_payment}
-
-    #         base_monthly_payment = calculate_descending_rate(
-    #             credit_amount, loan_term, interest_rate
-    #         )
-    #         return {"monthly_payment": base_monthly_payment}
-
-    #     abort(500, message="not implemented")
-
-    # def put(self):
-    #     kwargs = mortgageCalculator_put_args.parse_args()
-    #     mortgage = self.calculate_mortgage(kwargs)
-    #     db.insert_user_logs(kwargs)
-    #     return mortgage, 201
-    # def validate_values(self, credit_amount, loan_term, interest_rate):
-    #     if credit_amount <= 0:
-    #         abort(400, message={"credit_amount": "Invalid credit amount value"})
-    #     if loan_term <= 0:
-    #         abort(400, message={"loan_term": "Invalid loan term value"})
-    #     if interest_rate <= 0:
-    #         abort(400, message={"interest_rate": "Invalid interest rate value"})
-
     def validate_values(self, *args):
         for arg_value in args:
             if arg_value <= 0:
