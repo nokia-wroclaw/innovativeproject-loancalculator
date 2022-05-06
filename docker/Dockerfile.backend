@@ -1,6 +1,6 @@
 FROM python:3.9.10-buster
 
-WORKDIR /app/backend/
+WORKDIR /app/
 COPY backend/ /app
 
 ENV PATH="$PATH:/root/.local/bin"
