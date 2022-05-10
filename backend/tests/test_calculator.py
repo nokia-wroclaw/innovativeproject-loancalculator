@@ -1,4 +1,4 @@
-import server.calculator as calculator
+import backend.server.calculator as calculator
 
 
 def test_calculate_fixed_rate():

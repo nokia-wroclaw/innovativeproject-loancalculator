@@ -7,7 +7,7 @@ app = Flask(__name__)
 db = Db(app)
 
 mortgageCalculator_put_args = reqparse.RequestParser()
-# 1
+
 mortgageCalculator_put_args.add_argument(
     "interest_type",
     type=str,
@@ -15,7 +15,7 @@ mortgageCalculator_put_args.add_argument(
     help='Interest type must be "fixed" or "WIBOR"',
     required=True,
 )
-# 2
+
 mortgageCalculator_put_args.add_argument(
     "installment_type",
     type=str,
@@ -23,23 +23,23 @@ mortgageCalculator_put_args.add_argument(
     help='Installment type must be "fixed" or "descending"',
     required=True,
 )
-# 4
+
 mortgageCalculator_put_args.add_argument(
     "down_payment", type=int, help="Own's contribution is required", required=True
 )
-# 5
+
 mortgageCalculator_put_args.add_argument(
     "credit_amount", type=int, help="Credit value is required", required=True
 )
-# 6
+
 mortgageCalculator_put_args.add_argument(
     "loan_term", type=int, help="Loan term is required", required=True
 )
-# 7
+
 mortgageCalculator_put_args.add_argument(
     "interest_rate", type=int, help="Interest rate is required", required=True
 )
-# 8
+
 mortgageCalculator_put_args.add_argument(
     "commission", type=int, help="Commission is required", required=True
 )
