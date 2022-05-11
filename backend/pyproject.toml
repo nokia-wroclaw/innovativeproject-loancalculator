@@ -2,7 +2,7 @@
 name = "server"
 version = "0.1.0"
 description = "Backend for innovativeproject-loancalculator"
-authors = ["Szymon Ciszewski <szymox815@gmail.com>", "Natalia Rusin <>", "Mikołaj Rarok <mikolaj.rarok@gmail.com>"]
+authors = ["Szymon Ciszewski <>", "Natalia Rusin <>", "Mikołaj Rarok <mikolaj.rarok@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "3.9.10"
