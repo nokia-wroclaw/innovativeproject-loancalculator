@@ -98,23 +98,34 @@ class MortgageCalculator(Resource):
 
         self.validate_values(credit_amount, loan_term, interest_rate)
 
-        credit_amount *= (1 + commission/100)
+        credit_amount *= 1 + commission / 100
 
         mortgage_base, cost_base, interest_base = self.calculate_mortgage(
             interest_type, installment_type, credit_amount, loan_term, interest_rate
         )
 
-        mortgage_5_years_more, cost_5_years_more, interest_5_years_more = self.calculate_mortgage(
+        (
+            mortgage_5_years_more,
+            cost_5_years_more,
+            interest_5_years_more,
+        ) = self.calculate_mortgage(
             interest_type, installment_type, credit_amount, loan_term + 5, interest_rate
         )
 
-        mortgage_5_years_less = ''
-        if (loan_term >= 10):
-            mortgage_5_years_less, cost_5_years_less, interest_5_years_less = self.calculate_mortgage(
-                interest_type, installment_type, credit_amount, loan_term - 5, interest_rate
+        mortgage_5_years_less = ""
+        if loan_term >= 10:
+            (
+                mortgage_5_years_less,
+                cost_5_years_less,
+                interest_5_years_less,
+            ) = self.calculate_mortgage(
+                interest_type,
+                installment_type,
+                credit_amount,
+                loan_term - 5,
+                interest_rate,
             )
 
-        
         user_id = db.insert_user_logs(user_params)
 
         resp = {
@@ -123,20 +134,19 @@ class MortgageCalculator(Resource):
             "baseline_time": {
                 "monthly_payment": mortgage_base,
                 "total_payment": cost_base,
-                "total_interest": interest_base
+                "total_interest": interest_base,
             },
             "5_years_more": {
                 "monthly_payment": mortgage_5_years_more,
                 "total_payment": cost_5_years_more,
-                "total_interest": interest_5_years_more
+                "total_interest": interest_5_years_more,
             },
             "5_years_less": {
                 "monthly_payment": mortgage_5_years_less,
                 "total_payment": cost_5_years_less,
-                "total_interest": interest_5_years_less
-            }
+                "total_interest": interest_5_years_less,
+            },
         }
-
 
         return resp, 201
 
