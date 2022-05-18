@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Slider, InputNumber } from 'antd';
-import 'antd/dist/antd.css';
 import { InputContainer, SliderContainer } from './sliderInputSectionElements';
 import { SectionTitle } from '../sectionTitle/SectionTitle';
 import { LabelName } from '../labelName/labelName';
