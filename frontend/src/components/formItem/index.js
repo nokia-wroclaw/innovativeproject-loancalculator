@@ -13,7 +13,7 @@ import { FormContainer } from '../../pages/calculator/CalculatorElements';
 function FormItem({ item }) {
   if (item.type.includes('radioInput'))
     return (
-      <DataPlaceholder variant={item.gridItem}>
+      <DataPlaceholder variant={item.name}>
         <SectionTitle>{item.title}</SectionTitle>
         <FormContainer.Item name={item.name}>
           <CustomRadio.Group>
@@ -26,7 +26,7 @@ function FormItem({ item }) {
       </DataPlaceholder>
     );
   return (
-    <DataPlaceholder variant={item.gridItem}>
+    <DataPlaceholder variant={item.name}>
       <SectionTitle>{item.title}</SectionTitle>
       <FormContainer.Item name={item.name}>
         <CustomSlider

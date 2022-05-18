@@ -8,7 +8,6 @@ const formData = [
     value2: 'WIBOR',
     value1Name: 'oprocentowanie stałe',
     value2Name: 'oprocentowanie zmienne',
-    gridItem: 'one',
   },
   {
     id: 'radio2',
@@ -19,7 +18,6 @@ const formData = [
     value2: 'fixed',
     value1Name: 'raty malejące',
     value2Name: 'raty stałe',
-    gridItem: 'two',
   },
   {
     id: 'input1',
@@ -31,7 +29,6 @@ const formData = [
     step: 50000,
     addonAfter: 'zł',
     marks: { 0: '0', 1000000: '1 000 000' },
-    gridItem: 'three',
   },
   {
     id: 'input2',
@@ -43,7 +40,6 @@ const formData = [
     step: 10000,
     addonAfter: 'zł',
     marks: { 0: '0', 500000: '500 000' },
-    gridItem: 'four',
   },
   {
     id: 'input3',
@@ -55,7 +51,6 @@ const formData = [
     step: 5,
     addonAfter: 'lat',
     marks: { 0: '0', 35: '35' },
-    gridItem: 'five',
   },
   {
     id: 'input4',
@@ -67,7 +62,6 @@ const formData = [
     step: 0.1,
     addonAfter: '%',
     marks: { 0: '0', 20: '20' },
-    gridItem: 'six',
   },
   {
     id: 'input5',
@@ -79,7 +73,6 @@ const formData = [
     step: 0.1,
     addonAfter: '%',
     marks: { 0: '0', 10: '10' },
-    gridItem: 'seven',
   },
 ];
 

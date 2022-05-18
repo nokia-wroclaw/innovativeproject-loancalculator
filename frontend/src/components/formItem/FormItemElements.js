@@ -2,61 +2,38 @@ import styled from 'styled-components';
 import { Slider, InputNumber, Radio } from 'antd';
 import 'antd/dist/antd.css';
 
-const handleGridPlacement = (gridItem, screenSize) => {
-  switch (gridItem) {
-    case 'one':
-      return '1/2/2/5';
-    case 'two':
-      return '2/2/3/5';
-    case 'three':
-      return '3/2/4/5';
-    case 'four':
-      switch (screenSize) {
-        case 'large':
-          return '3/5/4/9';
-        case 'medium':
-          return '3/6/4/9';
-        case 'small':
-          return '4/2/5/5';
-        default:
-          return '';
-      }
-    case 'five':
-      switch (screenSize) {
-        case 'large':
-          return '3/9/4/12';
-        case 'medium':
-          return '4/2/5/5';
-        case 'small':
-          return '6/2/7/5';
-        default:
-          return '';
-      }
-    case 'six':
-      switch (screenSize) {
-        case 'large':
-          return '4/2/5/5';
-        case 'medium':
-          return '4/6/5/9';
-        case 'small':
-          return '7/2/8/5';
-        default:
-          return '';
-      }
-    case 'seven':
-      switch (screenSize) {
-        case 'large':
-          return '4/5/5/9';
-        case 'medium':
-          return '5/2/6/5';
-        case 'small':
-          return '8/2/9/5';
-        default:
-          return '';
-      }
-    default:
-      return '';
+const handleGridPlacement = (name, screenSize) => {
+  if (
+    name === 'interest_type' ||
+    name === 'installment_type' ||
+    name === 'credit_amount'
+  ) {
+    return {
+      interest_type: '1/2/2/5',
+      installment_type: '2/2/3/5',
+      credit_amount: '3/2/4/5',
+    }[name];
   }
+  return {
+    small: {
+      down_payment: '4/2/5/5',
+      loan_term: '6/2/7/5',
+      interest_rate: '7/2/8/5',
+      commission: '8/2/9/5',
+    },
+    medium: {
+      down_payment: '3/6/4/9',
+      loan_term: '4/2/5/5',
+      interest_rate: '4/6/5/9',
+      commission: '5/2/6/5',
+    },
+    large: {
+      down_payment: '3/5/4/9',
+      loan_term: '3/9/4/12',
+      interest_rate: '4/2/5/5',
+      commission: '4/5/5/9',
+    },
+  }[screenSize][name];
 };
 
 export const CustomRadio = styled(Radio)`
