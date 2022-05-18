@@ -14,6 +14,7 @@ export const Nav = styled.nav`
   justify-content: space-around;
   padding: 0.5rem calc((100vw - 1000px) / 2);
   z-index: 10000;
+  width: 100%;
 `;
 
 export const NavLink = styled(Link)`

@@ -14,7 +14,17 @@ function RadioButtonSection({ headerText, firstOption, secondOption }) {
     <BoxContainer>
       <SectionTitle> {headerText} </SectionTitle>
 
-      <Radio.Group onChange={onChange} value={value}>
+      <Radio.Group
+        onChange={onChange}
+        value={value}
+        style={{
+          backgroundColor: '#fff',
+          padding: '1.5rem',
+          maxWidth: '60vh',
+          width: '50vh',
+          borderRadius: '20px',
+        }}
+      >
         <Space direction="vertical">
           <Radio value={1}>{firstOption}</Radio>
           <Radio value={2}>{secondOption}</Radio>

@@ -1,13 +1,16 @@
 [tool.poetry]
-name = "backend"
+name = "server"
 version = "0.1.0"
 description = "Backend for innovativeproject-loancalculator"
-authors = ["Szymon Ciszewski <szymox815@gmail.com>", "Natalia Rusin <>", "Mikołaj Rarok <>"]
+authors = ["Szymon Ciszewski", "Natalia Rusin", "Mikołaj Rarok"]
 
 [tool.poetry.dependencies]
 python = "3.9.10"
 Flask = "^2.0.3"
 beautifulsoup4 = "^4.10.0"
+Flask-RESTful = "^0.3.9"
+Flask-Cors = "^3.0.10"
+Flask-PyMongo = "^2.3.0"
 
 [tool.poetry.dev-dependencies]
 black = "^22.1.0"

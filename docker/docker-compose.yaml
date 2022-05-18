@@ -1,23 +1,30 @@
 version: "3.9"
 services:
   frontend:
+    container_name: frontend_calculator
     build:
       context: ..
       dockerfile: ./docker/Dockerfile.frontend
     ports:
       - "3000:3000"
   backend:
+    container_name: backend_calculator
+    environment:
+      - DB_URI=mongodb://mongodb_calculator:27017/calculator_data
     build:
       context: ..
       dockerfile: ./docker/Dockerfile.backend
     ports:
-      - "8000:5000"
+      - "5000:5000"
   mongodb:
     image: mongo:latest
-    ports:
-      - 27017:27017
+    container_name: mongodb_calculator
+    environment:
+      - MONGO_INITDB_DATABASE=calculator_data
     volumes:
       - ~/apps/mongo:/data/db
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=username
-      - MONGO_INITDB_ROOT_PASSWORD=password
+    ports:
+       - 27017:27017
+
+
+      
