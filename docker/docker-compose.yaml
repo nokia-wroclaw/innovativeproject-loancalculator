@@ -16,6 +16,15 @@ services:
       dockerfile: ./docker/Dockerfile.backend
     ports:
       - "5000:5000"
+  scrapper:
+    container_name: scrapper_calculator
+    environment:
+      - DB_URI=mongodb://mongodb_calculator:27017/calculator_data
+    build:
+      context: ..
+      dockerfile: ./docker/Dockerfile.scrapper
+    ports:
+      - "5001:5000"
   mongodb:
     image: mongo:latest
     container_name: mongodb_calculator
