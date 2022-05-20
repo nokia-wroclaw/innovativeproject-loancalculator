@@ -136,12 +136,12 @@ class MortgageCalculator(Resource):
                 "total_payment": cost_base,
                 "total_interest": interest_base,
             },
-            "5_years_more": {
+            "five_years_more": {
                 "monthly_payment": mortgage_5_years_more,
                 "total_payment": cost_5_years_more,
                 "total_interest": interest_5_years_more,
             },
-            "5_years_less": {
+            "five_years_less": {
                 "monthly_payment": mortgage_5_years_less,
                 "total_payment": cost_5_years_less,
                 "total_interest": interest_5_years_less,
