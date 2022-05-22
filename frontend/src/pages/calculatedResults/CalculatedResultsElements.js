@@ -1,70 +1,66 @@
 import styled from 'styled-components';
-import 'antd/dist/antd.css';
 import { Tabs } from 'antd';
 
 export const FixedInstallmentsContainer = styled.div`
-  background: linear-gradient(
-    180deg,
-    rgba(173, 229, 247, 0) 4.98%,
-    rgba(147, 228, 239, 0.0618911) 42.46%,
-    rgba(6, 223, 200, 0.4) 74.66%,
-    #5e60ce 98.46%
-  );
+  background: #f8f6fb;
   height: auto;
   min-height: 90vh;
   padding-top: 10vh;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 5fr 0.5fr;
-  column-gap: 0.1rem;
-  row-gap: 0.1rem;
+  grid-template-rows: 0.4fr repeat(3, 1fr) 0.2fr;
+  column-gap: 2rem;
+  row-gap: 2rem;
 
-  @media screen and (max-width: 780px) {
+  @media screen and (max-width: 1400px) {
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: 0.4fr repeat(2, 1fr) 0.2fr;
+  }
+
+  @media screen and (max-width: 768px) {
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 2.5fr 2.5fr 0.5fr;
+    grid-template-rows: 0.4fr repeat(5, 1fr) 0.2fr;
   }
 `;
 
-export const InstallmentContainer = styled.div`
+export const Headers = styled.div`
   grid-area: 1/2/2/7;
-  background-color: white;
-  height: 90%;
-  width: 90%;
-  border-radius: 25px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 
-  @media screen and (max-width: 780px) {
+  @media screen and (max-width: 1400px) {
+    grid-area: 1/2/2/9;
+  }
+
+  @media screen and (max-width: 768px) {
     grid-area: 1/2/2/5;
   }
 `;
 
 export const IllustrationContainer = styled.div`
   .img {
-    width: 100%;
+    width: 90%;
     height: auto;
   }
-  grid-area: 1/8/3/12;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  grid-area: 2/7/4/12;
+  justify-self: center;
+  align-self: center;
+
+  @media screen and (max-width: 1400px) {
+    display: none;
+  }
 
   @media screen and (max-width: 780px) {
-    grid-area: 2/2/3/5;
+    grid-area: 4/2/5/5;
+    display: block;
     width: 80%;
   }
 `;
 
 export const DescendingInstallmentsContainer = styled.div`
-  background: linear-gradient(
-    180deg,
-    rgba(173, 229, 247, 0) 4.98%,
-    rgba(147, 228, 239, 0.0618911) 42.46%,
-    rgba(6, 223, 200, 0.4) 74.66%,
-    #5e60ce 98.46%
-  );
+  background: #f8f6fb;
   height: auto;
   min-height: 90vh;
   padding-top: 10vh;

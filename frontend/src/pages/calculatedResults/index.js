@@ -3,36 +3,43 @@ import { useLocation } from 'react-router-dom';
 import Footer from '../../components/footerPurple';
 import {
   FixedInstallmentsContainer,
-  InstallmentContainer,
   IllustrationContainer,
   DescendingInstallmentsContainer,
   YearTabs,
+  Headers,
 } from './CalculatedResultsElements';
-import { SectionTitle } from '../../components/sectionTitle/SectionTitle';
-import { GradientText } from '../../components/gradientText/GradientText';
-import landingPageIllustration from '../../images/landingPageIllustration.svg';
+import resultsIllustration from '../../images/results illustration.svg';
+import { SemiHeader } from '../../components/semiHeader/SemiHeader';
+import InstallmentContainer from '../../components/installmentContainer';
+import { PurpleAccentParagraph } from '../../components/purpleAccentParagraph/PurpleAccentParagraph';
 
 const { TabPane } = YearTabs;
 
 function CalculatedResults() {
   const location = useLocation();
 
-  if (location.state.response.monthly_payment.length !== undefined) {
+  const getInterestType = (interestType) => {
+    if (interestType === 'fixed') return 'Oprocentowanie stałe';
+    return 'Oprocentowanie zmienne';
+  };
+
+  const fieldNames = [
+    'Rodzaj oprocentowania',
+    'Rodzaj rat',
+    'Wkład własny',
+    'Kwota kredytu',
+    'Długość trwania',
+    'Oprocentowanie',
+    'Prowizja',
+  ];
+
+  if (location.state.response?.user_input?.installment_type !== 'fixed') {
     return (
       <>
         <DescendingInstallmentsContainer>
           <YearTabs defaultActiveKey="1" centered>
-            <TabPane tab="Rok 1" key="1">
-              Raty w roku 1
-            </TabPane>
-            <TabPane tab="Rok 2" key="2">
-              Raty w roku 2
-            </TabPane>
-            <TabPane tab="Rok 3" key="3">
-              Raty w roku 3
-            </TabPane>
-            <TabPane tab="Rok 4" key="4">
-              Raty w roku 4
+            <TabPane tab="Year 1" key="1">
+              Placeholder for descending installments
             </TabPane>
           </YearTabs>
         </DescendingInstallmentsContainer>
@@ -43,16 +50,38 @@ function CalculatedResults() {
   return (
     <>
       <FixedInstallmentsContainer>
-        <InstallmentContainer>
-          <SectionTitle>Twoja miesięczna rata kredytu</SectionTitle>
-          <GradientText>{location.state.response.monthly_payment}</GradientText>
-        </InstallmentContainer>
+        <Headers>
+          <SemiHeader>Twoja rata kredytu</SemiHeader>
+          <PurpleAccentParagraph>
+            {getInterestType(location.state.response.user_input.interest_type)}
+          </PurpleAccentParagraph>
+        </Headers>
+        <InstallmentContainer
+          title="Twoje koszty kredytu"
+          type="baseline_time"
+          data={location.state.responseata.baseline_time}
+          addon="zł"
+        />
+        <InstallmentContainer
+          title="Twoje dane"
+          type="user_input"
+          data={location.state.response.user_input}
+          fieldNames={fieldNames}
+        />
+        <InstallmentContainer
+          title="Twoje koszty kredytu krótszego o 5 lat"
+          type="five_years_less"
+          data={location.state.response.five_years_less}
+          addon="zł"
+        />
+        <InstallmentContainer
+          title="Twoje koszty kredytu dłuższego o 5 lat"
+          type="five_years_more"
+          data={location.state.response.five_years_more}
+          addon="zł"
+        />
         <IllustrationContainer>
-          <img
-            className="img"
-            src={landingPageIllustration}
-            alt="illustration"
-          />
+          <img className="img" src={resultsIllustration} alt="illustration" />
         </IllustrationContainer>
       </FixedInstallmentsContainer>
       <Footer />
