@@ -1,6 +1,7 @@
 import server.calculator as calculator
 import json
 
+
 def test_calculate_fixed_rate():
     assert calculator.calculate_fixed_rate(
         credit_amount=100000, loan_term=10, interest_rate=3
@@ -13,6 +14,4 @@ def test_calculate_descending_rate():
     f.close()
     assert calculator.calculate_descending_rate(
         credit_amount=100000, loan_term=10, interest_rate=3
-    ) == (
-        data["monthly_payment"], data["total_cost"], data["total_interest"]
-    )
+    ) == (data["monthly_payment"], data["total_cost"], data["total_interest"])
