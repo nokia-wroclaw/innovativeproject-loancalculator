@@ -28,7 +28,7 @@ def calculate_descending_rate(credit_amount, loan_term, interest_rate):
             1 + (loan_term_months - i) * (interest_rate / MONTHS_IN_YEAR)
         )
         monthly_payment.append(round(payment, 2))
-        total_cost += round(payment, 2)
+        total_cost += payment
 
     total_interest = round(total_cost - credit_amount, 2)
     return {
