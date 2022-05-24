@@ -64,15 +64,9 @@ class MortgageCalculator(Resource):
     ):
         if interest_type == "fixed":
             if installment_type == "fixed":
-                monthly_payment, total_cost, total_interest = calculate_fixed_rate(
-                    credit_amount, loan_term, interest_rate
-                )
-                return monthly_payment, total_cost, total_interest
+                return calculate_fixed_rate(credit_amount, loan_term, interest_rate)
 
-            monthly_payment, total_cost, total_interest = calculate_descending_rate(
-                credit_amount, loan_term, interest_rate
-            )
-            return monthly_payment, total_cost, total_interest
+            return calculate_descending_rate(credit_amount, loan_term, interest_rate)
 
         abort(500, message="not implemented")
 
@@ -100,25 +94,15 @@ class MortgageCalculator(Resource):
 
         credit_amount *= 1 + commission / 100
 
-        mortgage_base, cost_base, interest_base = self.calculate_mortgage(
+        baseline_time = self.calculate_mortgage(
             interest_type, installment_type, credit_amount, loan_term, interest_rate
         )
 
-        (
-            mortgage_5_years_more,
-            cost_5_years_more,
-            interest_5_years_more,
-        ) = self.calculate_mortgage(
+        five_years_more = self.calculate_mortgage(
             interest_type, installment_type, credit_amount, loan_term + 5, interest_rate
         )
-
-        mortgage_5_years_less = ""
         if loan_term >= 10:
-            (
-                mortgage_5_years_less,
-                cost_5_years_less,
-                interest_5_years_less,
-            ) = self.calculate_mortgage(
+            five_years_less = self.calculate_mortgage(
                 interest_type,
                 installment_type,
                 credit_amount,
@@ -131,21 +115,9 @@ class MortgageCalculator(Resource):
         resp = {
             "user_id": user_id,
             "user_input": request.json,
-            "baseline_time": {
-                "monthly_payment": mortgage_base,
-                "total_payment": cost_base,
-                "total_interest": interest_base,
-            },
-            "five_years_more": {
-                "monthly_payment": mortgage_5_years_more,
-                "total_payment": cost_5_years_more,
-                "total_interest": interest_5_years_more,
-            },
-            "five_years_less": {
-                "monthly_payment": mortgage_5_years_less,
-                "total_payment": cost_5_years_less,
-                "total_interest": interest_5_years_less,
-            },
+            "baseline_time": baseline_time,
+            "five_years_more": five_years_more,
+            "five_years_less": five_years_less,
         }
 
         return resp, 201
