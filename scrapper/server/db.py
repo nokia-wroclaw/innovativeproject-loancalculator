@@ -3,6 +3,7 @@ import flask_pymongo
 from flask_restful import Api
 from flask_pymongo import PyMongo
 import os
+from pymongo import errors
 
 
 class Db:
@@ -14,18 +15,15 @@ class Db:
     def insert_today_wibor_rates(self, kwargs):
         try:
             self.db.wibor_rates.insert_one(kwargs)
-        except BaseException as e:
+        except errors.ConnectionFailure:
             print("Could not connect to database")
-            print(f"Unexpected {e=}, {type(e)=}")
 
     def get_todays_wibor(self):
         try:
             cursor = self.db.wibor_rates.find().sort([("_id", -1)]).limit(1)
             wibor_rates = cursor[0]
             if wibor_rates == None:
-                return ""
+                return
             return wibor_rates
-        except BaseException as e:
+        except errors.ConnectionFailure:
             print("Could not connect to database")
-            print(f"Unexpected {e=}, {type(e)=}")
-            return ""
