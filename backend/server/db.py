@@ -11,8 +11,7 @@ class Db:
     def __init__(self, app):
         self.api = Api(app)
         self.cors = CORS(app, resources={r"/mortgageCalculator/*": {"origins": "*"}})
-        #self.mongodb_client = PyMongo(app, uri=os.environ.get("DB_URI"))
-        self.mongodb_client = PyMongo(app, uri="mongodb://127.0.0.2:27017/calculator_data")
+        self.mongodb_client = PyMongo(app, uri=os.environ.get("DB_URI"))
         self.db = self.mongodb_client.db
 
     def insert_user_logs(self, kwargs):
