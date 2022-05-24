@@ -29,3 +29,13 @@ class Db:
             return user_data
         except errors.ConnectionFailure:
             print("Could not connect to database")
+
+    def get_todays_wibor(self):
+        try:
+            cursor = self.db.wibor_rates.find().sort([("_id", -1)]).limit(1)
+            wibor_rates = cursor[0]
+            if wibor_rates == None:
+                return
+            return wibor_rates
+        except errors.ConnectionFailure:
+            print("Could not connect to database")
