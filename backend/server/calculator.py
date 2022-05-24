@@ -12,7 +12,7 @@ def calculate_fixed_rate(credit_amount, loan_term, interest_rate):
     total_cost = round(monthly_payment * loan_term_months, 2)
     total_interest = round(total_cost - credit_amount, 2)
     return {
-        "monthly_payment": monthly_payment,
+        "monthly_payment": [monthly_payment] * loan_term_months,
         "total_cost": total_cost,
         "total_interest": total_interest,
     }

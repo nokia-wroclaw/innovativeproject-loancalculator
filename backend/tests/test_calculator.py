@@ -5,7 +5,11 @@ import json
 def test_calculate_fixed_rate():
     assert calculator.calculate_fixed_rate(
         credit_amount=100000, loan_term=10, interest_rate=3
-    ) == {"monthly_payment": 965.61, "total_cost": 115873.2, "total_interest": 15873.2}
+    ) == {
+        "monthly_payment": [965.61] * 120,
+        "total_cost": 115873.2,
+        "total_interest": 15873.2,
+    }
 
 
 def test_calculate_descending_rate():
