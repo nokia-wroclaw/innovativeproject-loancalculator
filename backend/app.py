@@ -1,10 +1,18 @@
-from flask import Flask
+from flask import Flask, request
 from flask_restful import Resource, reqparse, abort
 from server.calculator import calculate_fixed_rate, calculate_descending_rate
 from server.db import Db
 
+
 app = Flask(__name__)
 db = Db(app)
+
+
+mortgageCalculator_get_args = reqparse.RequestParser()
+
+mortgageCalculator_get_args.add_argument(
+    "user_id", type=str, help="User id is required", required=True
+)
 
 mortgageCalculator_put_args = reqparse.RequestParser()
 
@@ -56,17 +64,19 @@ class MortgageCalculator(Resource):
     ):
         if interest_type == "fixed":
             if installment_type == "fixed":
-                base_monthly_payment = calculate_fixed_rate(
-                    credit_amount, loan_term, interest_rate
-                )
-                return {"monthly_payment": base_monthly_payment}
+                return calculate_fixed_rate(credit_amount, loan_term, interest_rate)
 
-            base_monthly_payment = calculate_descending_rate(
-                credit_amount, loan_term, interest_rate
-            )
-            return {"monthly_payment": base_monthly_payment}
+            return calculate_descending_rate(credit_amount, loan_term, interest_rate)
 
         abort(500, message="not implemented")
+
+    def get(self):
+        params = mortgageCalculator_get_args.parse_args()
+        user_id = params["user_id"]
+
+        user_data = db.get_user_data_by_id(user_id)
+
+        return user_data, 200
 
     def put(self):
 
@@ -74,16 +84,43 @@ class MortgageCalculator(Resource):
 
         interest_type = user_params["interest_type"]
         installment_type = user_params["installment_type"]
+        down_payment = user_params["down_payment"]
         credit_amount = user_params["credit_amount"]
         loan_term = user_params["loan_term"]
         interest_rate = user_params["interest_rate"]
+        commission = user_params["commission"]
 
         self.validate_values(credit_amount, loan_term, interest_rate)
-        mortgage = self.calculate_mortgage(
+
+        credit_amount *= 1 + commission / 100
+
+        baseline_time = self.calculate_mortgage(
             interest_type, installment_type, credit_amount, loan_term, interest_rate
         )
-        db.insert_user_logs(user_params)
-        return mortgage, 201
+
+        five_years_more = self.calculate_mortgage(
+            interest_type, installment_type, credit_amount, loan_term + 5, interest_rate
+        )
+        if loan_term >= 10:
+            five_years_less = self.calculate_mortgage(
+                interest_type,
+                installment_type,
+                credit_amount,
+                loan_term - 5,
+                interest_rate,
+            )
+
+        user_id = db.insert_user_logs(user_params)
+
+        resp = {
+            "user_id": user_id,
+            "user_input": request.json,
+            "baseline_time": baseline_time,
+            "five_years_more": five_years_more,
+            "five_years_less": five_years_less,
+        }
+
+        return resp, 201
 
 
 db.api.add_resource(MortgageCalculator, "/mortgageCalculator")
