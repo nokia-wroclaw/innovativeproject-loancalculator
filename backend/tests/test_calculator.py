@@ -13,9 +13,8 @@ def test_calculate_fixed_rate():
 
 
 def test_calculate_descending_rate():
-    f = open("tests/output/test_calculator_output.json")
-    data = json.load(f)
-    f.close()
+    with open("tests/output/test_calculator_output.json") as fh:
+        data = json.load(fh)
     assert calculator.calculate_descending_rate(
         credit_amount=100000, loan_term=10, interest_rate=3
     ) == {
