@@ -11,7 +11,8 @@ def scrapper_get_wibor_rates():
 
     text = doc.get_text()
     percentages = re.findall(".{4}[%]", text)
+    date = (re.findall("[0-9]{4}[-][0-9]{2}[-][0-9]{2}", text)[0]).split("-")
     for i, percentage in enumerate(percentages):
         percentages[i] = percentage.replace(",", ".").rstrip("%")
 
-    return percentages
+    return {"date": [date[2], date[1], date[0]], "percentages": percentages}
