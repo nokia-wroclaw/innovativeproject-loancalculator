@@ -41,11 +41,11 @@ function CalculatedResultsContainer({ title, type, data, addon, fieldNames }) {
       <Data>
         <SectionTitle>{'Miesięczna rata: '}</SectionTitle>
         <InstallmentValue>
-          {`${data.monthly_payment} ${addon}`}
+          {`${data.monthly_payment[0]} ${addon}`}
         </InstallmentValue>
         <PairOfData
           pairKey="Całkowity koszt kredytu:"
-          valueKey={`${data.total_payment} ${addon}`}
+          valueKey={`${data.total_cost} ${addon}`}
         />
         <PairOfData
           pairKey="Całkowita wartość odsetek:"
@@ -59,9 +59,7 @@ function CalculatedResultsContainer({ title, type, data, addon, fieldNames }) {
 CalculatedResultsContainer.propTypes = {
   title: PropTypes.string,
   type: PropTypes.string,
-  data: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-  ),
+  data: PropTypes.objectOf(PropTypes.object),
   addon: PropTypes.string,
   fieldNames: PropTypes.arrayOf(PropTypes.oneOfType(PropTypes.string)),
 };
@@ -69,7 +67,7 @@ CalculatedResultsContainer.propTypes = {
 CalculatedResultsContainer.defaultProps = {
   title: '',
   type: '',
-  data: [],
+  data: {},
   addon: '',
   fieldNames: [],
 };

@@ -14,25 +14,18 @@ import InstallmentContainer from '../../components/installmentContainer';
 import { PurpleAccentParagraph } from '../../components/purpleAccentParagraph/PurpleAccentParagraph';
 
 const { TabPane } = YearTabs;
-
 function CalculatedResults() {
   const location = useLocation();
-
-  const getInterestType = (interestType) => {
-    if (interestType === 'fixed') return 'Oprocentowanie stałe';
-    return 'Oprocentowanie zmienne';
-  };
 
   const fieldNames = [
     'Rodzaj oprocentowania',
     'Rodzaj rat',
-    'Wkład własny',
     'Kwota kredytu',
+    'Wkład własny',
     'Długość trwania',
     'Oprocentowanie',
     'Prowizja',
   ];
-
   if (location.state.response?.user_input?.installment_type !== 'fixed') {
     return (
       <>
@@ -53,13 +46,15 @@ function CalculatedResults() {
         <Headers>
           <SemiHeader>Twoja rata kredytu</SemiHeader>
           <PurpleAccentParagraph>
-            {getInterestType(location.state.response.user_input.interest_type)}
+            {location.state.response.user_input.interest_type === 'fixed'
+              ? 'Oprocentowanie stałe'
+              : 'Oprocentowanie zmienne'}
           </PurpleAccentParagraph>
         </Headers>
         <InstallmentContainer
           title="Twoje koszty kredytu"
           type="baseline_time"
-          data={location.state.responseata.baseline_time}
+          data={location.state.response.baseline_time}
           addon="zł"
         />
         <InstallmentContainer

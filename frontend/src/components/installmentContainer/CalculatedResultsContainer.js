@@ -60,6 +60,8 @@ export const Data = styled.div`
 `;
 
 export const InstallmentValue = styled(GradientText)`
-  align-self: center !important;
-  width: auto !important;
+  &&& {
+    align-self: center;
+    width: auto;
+  }
 `;
