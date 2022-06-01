@@ -11,21 +11,20 @@ import {
 import resultsIllustration from '../../images/results illustration.svg';
 import { SemiHeader } from '../../components/semiHeader/SemiHeader';
 import InstallmentContainer from '../../components/installmentContainer';
-import { PurpleAccentParagraph } from '../../components/purpleAccentParagraph/PurpleAccentParagraph';
+import { PurpleAccentParagraph } from '../../components/accentParagraph/AccentParagraph';
+import containerData from './containerData';
 
 const { TabPane } = YearTabs;
 function CalculatedResults() {
   const location = useLocation();
 
-  const fieldNames = [
-    'Rodzaj oprocentowania',
-    'Rodzaj rat',
-    'Kwota kredytu',
-    'Wkład własny',
-    'Długość trwania',
-    'Oprocentowanie',
-    'Prowizja',
+  const responseData = [
+    location.state.response.baseline_time,
+    location.state.response.user_input,
+    location.state.response.five_years_less,
+    location.state.response.five_years_more,
   ];
+
   if (location.state.response?.user_input?.installment_type !== 'fixed') {
     return (
       <>
@@ -51,30 +50,16 @@ function CalculatedResults() {
               : 'Oprocentowanie zmienne'}
           </PurpleAccentParagraph>
         </Headers>
-        <InstallmentContainer
-          title="Twoje koszty kredytu"
-          type="baseline_time"
-          data={location.state.response.baseline_time}
-          addon="zł"
-        />
-        <InstallmentContainer
-          title="Twoje dane"
-          type="user_input"
-          data={location.state.response.user_input}
-          fieldNames={fieldNames}
-        />
-        <InstallmentContainer
-          title="Twoje koszty kredytu krótszego o 5 lat"
-          type="five_years_less"
-          data={location.state.response.five_years_less}
-          addon="zł"
-        />
-        <InstallmentContainer
-          title="Twoje koszty kredytu dłuższego o 5 lat"
-          type="five_years_more"
-          data={location.state.response.five_years_more}
-          addon="zł"
-        />
+        {containerData.map((item, index) => (
+          <InstallmentContainer
+            key={item.id}
+            title={item.title}
+            type={item.type}
+            data={responseData[index]}
+            addon={item.addon}
+            fieldNames={item.fieldNames}
+          />
+        ))}
         <IllustrationContainer>
           <img className="img" src={resultsIllustration} alt="illustration" />
         </IllustrationContainer>
