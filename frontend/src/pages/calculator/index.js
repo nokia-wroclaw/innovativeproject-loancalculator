@@ -43,7 +43,7 @@ function Calculator() {
         initialValues={initialValues}
         onFinish={(values) => {
           axios
-            .put({ BackendURL }, JSON.stringify(values), {
+            .put(BackendURL, JSON.stringify(values), {
               headers: {
                 'Content-Type': 'application/json',
               },

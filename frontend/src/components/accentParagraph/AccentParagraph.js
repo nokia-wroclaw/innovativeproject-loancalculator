@@ -10,3 +10,14 @@ export const PurpleAccentParagraph = styled.p`
     font-size: 4vmin;
   }
 `;
+
+export const WhiteAccentParagraph = styled.p`
+  color: #fff;
+  font-weight: 600;
+  font-size: 3vmin;
+
+  @media screen and (max-width: 768px) and (orientation: landscape),
+    screen and (max-height: 1400px) and (orientation: portrait) {
+    font-size: 4vmin;
+  }
+`
