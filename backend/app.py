@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask
 from flask_restful import Resource, reqparse, abort
 from server.calculator import calculate_fixed_rate, calculate_descending_rate
 from server.db import Db
@@ -45,7 +45,7 @@ mortgageCalculator_put_args.add_argument(
 )
 
 mortgageCalculator_put_args.add_argument(
-    "interest_rate", type=int, help="Interest rate is required", required=True
+    "interest_rate", type=int, help="Interest rate is required"
 )
 
 mortgageCalculator_put_args.add_argument(
@@ -62,13 +62,10 @@ class MortgageCalculator(Resource):
     def calculate_mortgage(
         self, interest_type, installment_type, credit_amount, loan_term, interest_rate
     ):
-        if interest_type == "fixed":
-            if installment_type == "fixed":
-                return calculate_fixed_rate(credit_amount, loan_term, interest_rate)
+        if installment_type == "fixed":
+            return calculate_fixed_rate(credit_amount, loan_term, interest_rate)
 
-            return calculate_descending_rate(credit_amount, loan_term, interest_rate)
-
-        abort(500, message="not implemented")
+        return calculate_descending_rate(credit_amount, loan_term, interest_rate)
 
     def get(self):
         params = mortgageCalculator_get_args.parse_args()
@@ -92,6 +89,9 @@ class MortgageCalculator(Resource):
 
         self.validate_values(credit_amount, loan_term, interest_rate)
 
+        if interest_type == "WIBOR":
+            interest_rate = float(db.get_todays_wibor()["wibor_6m"])
+
         credit_amount *= 1 + commission / 100
 
         baseline_time = self.calculate_mortgage(
@@ -101,6 +101,7 @@ class MortgageCalculator(Resource):
         five_years_more = self.calculate_mortgage(
             interest_type, installment_type, credit_amount, loan_term + 5, interest_rate
         )
+
         if loan_term >= 10:
             five_years_less = self.calculate_mortgage(
                 interest_type,
@@ -114,7 +115,15 @@ class MortgageCalculator(Resource):
 
         resp = {
             "user_id": user_id,
-            "user_input": request.json,
+            "user_input": {
+                "interest_type": interest_type,
+                "installment_type": installment_type,
+                "down_payment": down_payment,
+                "credit_amount": credit_amount,
+                "loan_term": loan_term,
+                "interest_rate": interest_rate,
+                "commission": commission,
+            },
             "baseline_time": baseline_time,
             "five_years_more": five_years_more,
             "five_years_less": five_years_less,

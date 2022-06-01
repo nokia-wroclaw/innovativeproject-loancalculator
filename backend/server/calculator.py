@@ -51,5 +51,5 @@ def format_monthly_payment(monthly_payment):
             current_year = current_year + 1
             current_year_list = []
     if len(monthly_payment) % MONTHS_IN_YEAR != 0:
-         formatted_payment[f"year_{current_year}"] = current_year_list
+        formatted_payment[f"year_{current_year}"] = current_year_list
     return formatted_payment
