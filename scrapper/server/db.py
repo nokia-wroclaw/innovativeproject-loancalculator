@@ -7,8 +7,10 @@ from pymongo import errors
 class Db:
     def __init__(self, app):
         self.api = Api(app)
-        #self.mongodb_client = PyMongo(app, uri=os.environ.get("DB_URI"))
-        self.mongodb_client = PyMongo(app, uri='mongodb://localhost:27017/calculator_data')
+        # self.mongodb_client = PyMongo(app, uri=os.environ.get("DB_URI"))
+        self.mongodb_client = PyMongo(
+            app, uri="mongodb://localhost:27017/calculator_data"
+        )
         self.db = self.mongodb_client.db
 
     def insert_today_wibor_rates(self, kwargs):
