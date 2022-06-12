@@ -4,6 +4,7 @@ import time
 from flask import Flask
 import schedule
 from server.scrapper import scrapper_get_wibor_rates
+from datetime import datetime
 
 
 app = Flask(__name__)
@@ -18,22 +19,17 @@ def job_get_wibor_rates():
     is_wibor_in_db = is_todays_wibor_already_in_db(wibor_rates["date"])
 
     if not is_wibor_in_db:
+        wibor_rates["date"] = wibor_rates["date"].strftime("%Y-%m-%d")
         db.insert_today_wibor_rates(wibor_rates)
 
 
-def is_todays_wibor_already_in_db(date: str) -> bool:
+def is_todays_wibor_already_in_db(date: datetime.date) -> bool:
     wibor_today = db.get_todays_wibor(date)
+
     if wibor_today == "" or wibor_today == None:
         return False
 
-    date = date.split("-")
-    wibor_today_formatted = (wibor_today["date"]).split("-")
-
-    if (
-        wibor_today_formatted[0] == date[0]
-        and wibor_today_formatted[1] == date[1]
-        and wibor_today_formatted[2] == date[2]
-    ):
+    if date == wibor_today["date"]:
         return True
     return False
 
