@@ -5,7 +5,11 @@ COPY scrapper/ /app
 
 ENV PATH="$PATH:/root/.local/bin"
 
-RUN curl -sSL https://install.python-poetry.org | python3 - && \
+RUN apt-get update && \
+    apt-get install -y locales && \
+    sed -i -e 's/# pl_PL.UTF-8 UTF-8/pl_PL.UTF-8 UTF-8/' /etc/locale.gen && \
+    dpkg-reconfigure --frontend=noninteractive locales && \
+    curl -sSL https://install.python-poetry.org | python3 - && \
     poetry config virtualenvs.create false && \
     poetry install
 
