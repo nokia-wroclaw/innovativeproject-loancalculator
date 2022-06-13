@@ -41,7 +41,7 @@ function CalculatedResultsContainer({ title, type, data, addon, fieldNames }) {
       <Data>
         <SectionTitle>{'Miesięczna rata: '}</SectionTitle>
         <InstallmentValue>
-          {`${data.monthly_payment[0]} ${addon}`}
+          {`${data.monthly_payment.year_1[0]} ${addon}`}
         </InstallmentValue>
         <PairOfData
           pairKey="Całkowity koszt kredytu:"

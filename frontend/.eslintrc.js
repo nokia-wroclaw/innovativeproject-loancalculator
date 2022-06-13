@@ -13,5 +13,10 @@ module.exports = {
         singleQuote: true,
       },
     ],
+    'react/no-unstable-nested-components': [
+      'off' || 'warn' || 'error',
+      { allowAsProps: true },
+    ],
+    'no-console': ['error', { allow: ['warn', 'error'] }],
   },
 };
