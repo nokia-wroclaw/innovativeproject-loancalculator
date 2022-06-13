@@ -20,4 +20,4 @@ export const WhiteAccentParagraph = styled.p`
     screen and (max-height: 1400px) and (orientation: portrait) {
     font-size: 4vmin;
   }
-`
+`;
