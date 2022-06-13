@@ -5,15 +5,18 @@ import Navbar from './components/navbar';
 import Home from './pages/homepage';
 import Calculator from './pages/calculator';
 import HowToCalculateInstallments from './pages/howToCalculateInstallments';
-import UsefulTerms from './pages/usefulTerms';
+import Wibor from './pages/wibor';
 import CalculatedResults from './pages/calculatedResults';
 import Sidebar from './components/sidebar';
+import { useWiborHistory } from './fetchData';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => {
     setIsOpen(!isOpen);
   };
+
+  const [historyData] = useWiborHistory();
 
   return (
     <BrowserRouter>
@@ -26,7 +29,7 @@ function App() {
           path="/jak-obliczamy-rate"
           element={<HowToCalculateInstallments />}
         />
-        <Route path="/przydatne-pojecia" element={<UsefulTerms />} />
+        <Route path="/wibor" element={<Wibor historyData={historyData} />} />
         <Route path="/wyniki-obliczen" element={<CalculatedResults />} />
       </Routes>
     </BrowserRouter>
