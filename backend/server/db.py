@@ -10,9 +10,8 @@ from pymongo import errors
 class Db:
     def __init__(self, app):
         self.api = Api(app)
-        self.cors = CORS(app, resources={r"/mortgageCalculator/*": {"origins": "*"}})
-        # self.mongodb_client = PyMongo(app, uri=os.environ.get("DB_URI"))
-        self.mongodb_client = PyMongo(app, "mongodb://localhost:27017/calculator_data")
+        self.cors = CORS(app, resources={r"/*": {"origins": "*"}})
+        self.mongodb_client = PyMongo(app, uri=os.environ.get("DB_URI"))
         self.db = self.mongodb_client.db
 
     def insert_user_logs(self, kwargs):
@@ -31,12 +30,23 @@ class Db:
         except errors.ConnectionFailure:
             print("Could not connect to database")
 
-    def get_todays_wibor(self):
+    def get_most_recent_wibor(self):
         try:
             cursor = self.db.wibor_rates.find().sort([("_id", -1)]).limit(1)
             wibor_rates = cursor[0]
             if wibor_rates == None:
+                print("xd")
                 return
             return wibor_rates
+        except errors.ConnectionFailure:
+            print("Could not connect to database")
+
+    def get_all_wibors(self):
+        try:
+            cursor = self.db.wibor_rates.find().sort([("_id", 1)])
+            wibor_rates_list = []
+            for wibor_rates in cursor:
+                wibor_rates_list.append(wibor_rates)
+            return wibor_rates_list
         except errors.ConnectionFailure:
             print("Could not connect to database")

@@ -1,3 +1,4 @@
+from urllib import response
 from flask import Flask
 from flask_restful import Resource, reqparse, abort
 from server.calculator import calculate_fixed_rate, calculate_descending_rate
@@ -90,7 +91,7 @@ class MortgageCalculator(Resource):
         self.validate_values(credit_amount, loan_term, interest_rate)
 
         if interest_type == "WIBOR":
-            interest_rate = float(db.get_todays_wibor()["wibor_6m"])
+            interest_rate = float(db.get_most_recent_wibor()["WIBOR 6M"])
 
         credit_amount *= 1 + commission / 100
 
@@ -132,4 +133,41 @@ class MortgageCalculator(Resource):
         return resp, 201
 
 
+class WiborChart(Resource):
+    def get(self):
+        wibor_rates_list = db.get_all_wibors()
+
+        list_3m = []
+        list_6m = []
+
+        for wibor_rates in wibor_rates_list:
+            list_3m.append({"x": wibor_rates["date"], "y": wibor_rates["WIBOR 3M"]})
+            list_6m.append({"x": wibor_rates["date"], "y": wibor_rates["WIBOR 6M"]})
+
+        dict_3m = {"id": "WIBOR 3M", "data": list_3m}
+        dict_6m = {"id": "WIBOR 6M", "data": list_6m}
+
+        list_both = [dict_3m, dict_6m]
+
+        return {"WIBOR CHART": list_both}, 201
+
+
+class WiborTable(Resource):
+    def get(self):
+        table = db.get_most_recent_wibor()
+        resp = {
+            "date": table["date"],
+            "WIBOR ON": table["WIBOR ON"],
+            "WIBOR TN": table["WIBOR TN"],
+            "WIBOR SW": table["WIBOR SW"],
+            "WIBOR 1M": table["WIBOR 1M"],
+            "WIBOR 3M": table["WIBOR 3M"],
+            "WIBOR 6M": table["WIBOR 6M"],
+            "WIBOR 1R": table["WIBOR 1R"],
+        }
+        return resp, 201
+
+
 db.api.add_resource(MortgageCalculator, "/mortgageCalculator")
+db.api.add_resource(WiborChart, "/wiborChart")
+db.api.add_resource(WiborTable, "/wiborTable")
