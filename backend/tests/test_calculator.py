@@ -3,17 +3,19 @@ import json
 
 
 def test_calculate_fixed_rate():
+    with open("tests/output/test_calculator_output_fixed.json") as fh:
+        data = json.load(fh)
     assert calculator.calculate_fixed_rate(
         credit_amount=100000, loan_term=10, interest_rate=3
     ) == {
-        "monthly_payment": [965.61] * 120,
-        "total_cost": 115873.2,
-        "total_interest": 15873.2,
+        "monthly_payment": data["monthly_payment"],
+        "total_cost": data["total_cost"],
+        "total_interest": data["total_interest"],
     }
 
 
 def test_calculate_descending_rate():
-    with open("tests/output/test_calculator_output.json") as fh:
+    with open("tests/output/test_calculator_output_descending.json") as fh:
         data = json.load(fh)
     assert calculator.calculate_descending_rate(
         credit_amount=100000, loan_term=10, interest_rate=3
