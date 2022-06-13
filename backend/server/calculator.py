@@ -12,7 +12,7 @@ def calculate_fixed_rate(credit_amount, loan_term, interest_rate):
     total_cost = round(monthly_payment * loan_term_months, 2)
     total_interest = round(total_cost - credit_amount, 2)
     return {
-        "monthly_payment": [monthly_payment] * loan_term_months,
+        "monthly_payment": format_monthly_payment([monthly_payment] * loan_term_months),
         "total_cost": total_cost,
         "total_interest": total_interest,
     }
@@ -32,7 +32,24 @@ def calculate_descending_rate(credit_amount, loan_term, interest_rate):
 
     total_interest = round(total_cost - credit_amount, 2)
     return {
-        "monthly_payment": monthly_payment,
+        "monthly_payment": format_monthly_payment(monthly_payment),
         "total_cost": round(total_cost, 2),
         "total_interest": total_interest,
     }
+
+
+def format_monthly_payment(monthly_payment):
+
+    formatted_payment = {}
+    current_year_list = []
+    current_year = 1
+
+    for count, value in enumerate(monthly_payment):
+        current_year_list.append(value)
+        if count % MONTHS_IN_YEAR == 11:
+            formatted_payment[f"year_{current_year}"] = current_year_list
+            current_year = current_year + 1
+            current_year_list = []
+    if len(monthly_payment) % MONTHS_IN_YEAR != 0:
+        formatted_payment[f"year_{current_year}"] = current_year_list
+    return formatted_payment
