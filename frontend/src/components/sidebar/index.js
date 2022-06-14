@@ -35,8 +35,8 @@ function Sidebar({ isOpen, toggle }) {
           <SidebarLink to="/jak-obliczamy-rate" onClick={toggle}>
             Jak obliczamy ratę?
           </SidebarLink>
-          <SidebarLink to="/przydatne-pojecia" onClick={toggle}>
-            Przydatne pojęcia
+          <SidebarLink to="/wibor" onClick={toggle}>
+            Wibor
           </SidebarLink>
         </SidebarMenu>
       </SidebarWrapper>

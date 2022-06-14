@@ -25,7 +25,7 @@ function Navbar({ toggle }) {
           <NavBtnLink to="/kalkulator">Kalkulator</NavBtnLink>
         </NavBtn>
         <NavLink to="/jak-obliczamy-rate">Jak obliczamy ratę?</NavLink>
-        <NavLink to="/przydatne-pojecia">Przydatne pojecia</NavLink>
+        <NavLink to="/wibor">Wibor</NavLink>
       </NavMenu>
     </Nav>
   );
