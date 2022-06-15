@@ -1,3 +1,5 @@
-const BackendURL = 'http://127.0.0.1:5000/mortgageCalculator';
-const wiborChartURL = 'http://127.0.0.1:5000/wiborChart';
+const BackendURL =
+  'https://monkfish-app-i4ovz.ondigitalocean.app/docker-backend/mortgageCalculator';
+const wiborChartURL =
+  'https://monkfish-app-i4ovz.ondigitalocean.app/docker-backend/wiborChart';
 export { BackendURL, wiborChartURL };

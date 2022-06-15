@@ -9,6 +9,7 @@ export const useWiborHistory = () => {
       .get(wiborChartURL)
       .then((response) => {
         const tempData = response.data;
+        window.localStorage.setItem('wibor', JSON.stringify(tempData));
         setHistoryData(tempData);
       })
       .catch((error) => {

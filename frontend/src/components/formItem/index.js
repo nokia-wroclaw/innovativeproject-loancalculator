@@ -19,7 +19,9 @@ function FormItem({ item }) {
           <CustomRadio.Group>
             <Space direction="vertical">
               <CustomRadio value={item.value1}>{item.value1Name}</CustomRadio>
-              <CustomRadio value={item.value2}>{item.value2Name}</CustomRadio>
+              {item.value2Name !== '' && (
+                <CustomRadio value={item.value2}>{item.value2Name}</CustomRadio>
+              )}
             </Space>
           </CustomRadio.Group>
         </FormContainer.Item>

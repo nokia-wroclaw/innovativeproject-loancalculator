@@ -8,15 +8,12 @@ import HowToCalculateInstallments from './pages/howToCalculateInstallments';
 import Wibor from './pages/wibor';
 import CalculatedResults from './pages/calculatedResults';
 import Sidebar from './components/sidebar';
-import { useWiborHistory } from './fetchData';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => {
     setIsOpen(!isOpen);
   };
-
-  const [historyData] = useWiborHistory();
 
   return (
     <BrowserRouter>
@@ -29,7 +26,7 @@ function App() {
           path="/jak-obliczamy-rate"
           element={<HowToCalculateInstallments />}
         />
-        <Route path="/wibor" element={<Wibor historyData={historyData} />} />
+        <Route path="/wibor" element={<Wibor />} />
         <Route path="/wyniki-obliczen" element={<CalculatedResults />} />
       </Routes>
     </BrowserRouter>

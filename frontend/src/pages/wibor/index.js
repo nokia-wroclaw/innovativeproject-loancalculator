@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import WiborChartContainer from '../../components/wiborChartContainer';
 import {
   WiborContainer,
@@ -15,7 +14,9 @@ import { SemiHeader } from '../../components/semiHeader/SemiHeader';
 import { GradientText } from '../../components/gradientText/GradientText';
 import { SectionTitle } from '../../components/sectionTitle/SectionTitle';
 
-function Wibor({ historyData }) {
+function Wibor() {
+  const historyDatalocal = JSON.parse(window.localStorage.getItem('wibor'));
+
   return (
     <>
       <WiborContainer>
@@ -44,8 +45,8 @@ function Wibor({ historyData }) {
             <SectionTitle>WIBOR 3M</SectionTitle>
             <GradientText>
               {
-                historyData.WIBOR_CHART[0].data[
-                  historyData.WIBOR_CHART[0].data.length - 1
+                historyDatalocal.WIBOR_CHART[0].data[
+                  historyDatalocal.WIBOR_CHART[0].data.length - 1
                 ].y
               }
             </GradientText>
@@ -54,8 +55,8 @@ function Wibor({ historyData }) {
             <SectionTitle>WIBOR 6M</SectionTitle>
             <GradientText>
               {
-                historyData.WIBOR_CHART[1].data[
-                  historyData.WIBOR_CHART[0].data.length - 1
+                historyDatalocal.WIBOR_CHART[1].data[
+                  historyDatalocal.WIBOR_CHART[0].data.length - 1
                 ].y
               }
             </GradientText>
@@ -63,7 +64,7 @@ function Wibor({ historyData }) {
         </Rates>
         <Chart>
           <WiborChartContainer
-            chartData={historyData}
+            chartData={historyDatalocal}
             title="Wykres stóp Wibor 3M i 6M"
           />
         </Chart>
@@ -72,12 +73,5 @@ function Wibor({ historyData }) {
     </>
   );
 }
-Wibor.propTypes = {
-  historyData: PropTypes.objectOf(PropTypes.object)
-};
-
-Wibor.defaultProps = {
-  historyData: {},
-};
 
 export default Wibor;

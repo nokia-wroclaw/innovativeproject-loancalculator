@@ -29,7 +29,7 @@ def is_todays_wibor_already_in_db(date: datetime.date) -> bool:
     if wibor_today == "" or wibor_today == None:
         return False
 
-    if date == wibor_today["date"]:
+    if str(date) == wibor_today["date"]:
         return True
     return False
 
