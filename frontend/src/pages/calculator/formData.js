@@ -7,7 +7,7 @@ const formData = [
     value1: 'fixed',
     value2: 'WIBOR',
     value1Name: 'oprocentowanie stałe',
-    value2Name: 'oprocentowanie zmienne',
+    value2Name: '',
   },
   {
     id: 'radio2',

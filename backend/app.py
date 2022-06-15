@@ -46,11 +46,11 @@ mortgageCalculator_put_args.add_argument(
 )
 
 mortgageCalculator_put_args.add_argument(
-    "interest_rate", type=int, help="Interest rate is required"
+    "interest_rate", type=float, help="Interest rate is required"
 )
 
 mortgageCalculator_put_args.add_argument(
-    "commission", type=int, help="Commission is required", required=True
+    "commission", type=float, help="Commission is required", required=True
 )
 
 
@@ -149,7 +149,7 @@ class WiborChart(Resource):
 
         list_both = [dict_3m, dict_6m]
 
-        return {"WIBOR CHART": list_both}, 201
+        return {"WIBOR_CHART": list_both}, 201
 
 
 class WiborTable(Resource):
